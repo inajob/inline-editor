@@ -1,3 +1,7 @@
+# Demo
+
+https://inajob.github.io/inline-editor/
+
 # これは何？
 
 React.jsの練習がてら作成中のインラインMarkdownプレビューエディタです。
@@ -13,6 +17,3 @@ React.jsの練習がてら作成中のインラインMarkdownプレビューエ�
 
 - 見出しの書式変更
 
-# Demo
-
-https://inajob.github.io/inline-editor/
