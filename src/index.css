@@ -1,0 +1,34 @@
+
+body{
+  background-color: #ddd;
+}
+
+input {
+  width: 100%;
+  border-width: 0px 0px 1px 0px;
+  padding:3px;
+}
+input:focus{
+  outline: none;
+}
+line{
+  width: 100%;
+}
+.focus input {
+  background-color: #ffd;
+}
+.h1 input{
+  font-size: x-large;
+  border: solid #33f;
+  border-width: 1px 1px 1px 10px;
+}
+.h2 input{
+  font-size: large;
+  border: solid #33f;
+  border-width: 1px 1px 1px 5px;
+}
+.h3 input{
+  font-size: medium;
+  border: solid #33f;
+  border-width: 1px 1px 1px 1px;
+}
