@@ -5,9 +5,11 @@ body{
 }
 
 textarea {
-  width: 90%;
+  width: calc(100% - 20px);
   border-width: 0px 0px 1px 0px;
   padding:3px;
+  -webkit-appearance: none;
+   border-radius: 0;
 }
 textarea:focus{
   outline: none;
@@ -21,15 +23,20 @@ line{
 .h1 textarea{
   font-size: x-large;
   border: solid #33f;
-  border-width: 1px 1px 1px 10px;
+  border-width: 1px 1px 1px 20px;
 }
 .h2 textarea{
   font-size: large;
   border: solid #33f;
   border-width: 1px 1px 1px 5px;
+  margin-left: 15px;
 }
 .h3 textarea{
   font-size: medium;
   border: solid #33f;
   border-width: 1px 1px 1px 1px;
+  margin-left: 19px;
+}
+.normal textarea{
+  margin-left: 20px;
 }
