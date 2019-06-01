@@ -4,31 +4,31 @@ body{
   font-size: 16px;
 }
 
-input {
-  width: 100%;
+textarea {
+  width: 90%;
   border-width: 0px 0px 1px 0px;
   padding:3px;
 }
-input:focus{
+textarea:focus{
   outline: none;
 }
 line{
   width: 100%;
 }
-.focus input {
+.focus textarea {
   background-color: #ffd;
 }
-.h1 input{
+.h1 textarea{
   font-size: x-large;
   border: solid #33f;
   border-width: 1px 1px 1px 10px;
 }
-.h2 input{
+.h2 textarea{
   font-size: large;
   border: solid #33f;
   border-width: 1px 1px 1px 5px;
 }
-.h3 input{
+.h3 textarea{
   font-size: medium;
   border: solid #33f;
   border-width: 1px 1px 1px 1px;

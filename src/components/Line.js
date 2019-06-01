@@ -21,13 +21,14 @@ class Line extends React.Component{
       break;
       case 13: //enter
       this.props.onEnter(this.props.no)
+      e.preventDefault()
       break;
     }
   }
   render() {
     return (
       <div className={'line ' + this.props.className}>
-        <input type="text" ref="rawInput" value={this.props.text} onChange={this.send} onKeyDown={this.keyHandler} />
+        <textarea ref="rawInput" onChange={this.send} onKeyDown={this.keyHandler} value={this.props.text} />
       </div>
     )
   }
