@@ -12,7 +12,7 @@ class Lines extends React.Component{
     return (
       <div>
         {this.props.lines.map((line, index) => (
-          <Line key={index} {...line} onChange={this.props.onChange} onUp={this.props.onUp} onDown={this.props.onDown} onEnter={this.props.onEnter} />
+          <Line key={index} {...line} onChange={this.props.onChange} onUp={this.props.onUp} onDown={this.props.onDown} onEnter={this.props.onEnter} onClick={this.props.onClick} />
         ))}
       </div>
     )
@@ -81,6 +81,9 @@ const mapDispatchToProps = (dispatch) => {
     onEnter: (no) => {
       dispatch(setCursor(no + 1))
       dispatch(insertLine(no + 1, ""))
+    },
+    onClick: (no) => {
+      dispatch(setCursor(no))
     },
   }
 }

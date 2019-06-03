@@ -6,6 +6,7 @@ class Line extends React.Component{
     super(props)
     this.send = this.send.bind(this);
     this.keyHandler = this.keyHandler.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
   }
   send(e){
     this.props.onChange(this.props.no, e.target.value)
@@ -25,10 +26,13 @@ class Line extends React.Component{
       break;
     }
   }
+  clickHandler(e){
+    this.props.onClick(this.props.no);
+  }
   render() {
     return (
       <div className={'line ' + this.props.className}>
-        <textarea ref="rawInput" onChange={this.send} onKeyDown={this.keyHandler} value={this.props.text} />
+        <textarea ref="rawInput" onChange={this.send} onKeyDown={this.keyHandler} onClick={this.clickHandler} value={this.props.text} />
       </div>
     )
   }
@@ -49,6 +53,7 @@ Text.propTypes = {
   onChange: PropTypes.func.isRequired,
   onUp: PropTypes.func.isRequired,
   onDown: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   no: PropTypes.number.isRequires,
   text: PropTypes.string.isRequired
 }
