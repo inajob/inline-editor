@@ -20,11 +20,24 @@ class Line extends React.Component{
       case 40: //down
       this.props.onDown(this.props.no)
       break;
+      case 37: //left
+      // when cursor is head
+      if(e.target.selectionStart == 0 && e.target.selectionEnd == 0){
+        this.props.onUp(this.props.no)
+      }
+      break;
+      case 39: //right
+      // when cursor is end
+      if(e.target.selectionStart == this.props.text.length){
+        this.props.onDown(this.props.no)
+      }
+      break;
       case 13: //enter
       this.props.onEnter(this.props.no)
       e.preventDefault()
       break;
       case 8: //BS
+      // when cursor is head
       if(e.target.selectionStart == 0 && e.target.selectionEnd == 0){
         this.props.onBS(this.props.no, this.props.text)
         e.preventDefault()
