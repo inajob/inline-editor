@@ -1,15 +1,17 @@
 
 body{
-  background-color: #ddd;
+  background-color: #fff;
   font-size: 16px;
 }
 
 textarea {
   width: calc(100% - 20px);
-  border-width: 0px 0px 1px 0px;
+  border-width: 0px 0px 0px 0px;
   padding:3px;
   -webkit-appearance: none;
    border-radius: 0;
+   height: 1em;
+   background-color: transparent;
 }
 textarea:focus{
   outline: none;
@@ -18,23 +20,26 @@ line{
   width: 100%;
 }
 .focus textarea {
-  background-color: #ffd;
+  background-color: #ddf;
 }
 .h1 textarea{
   font-size: x-large;
+  font-weight: bold;
   border: solid #33f;
-  border-width: 1px 1px 1px 20px;
+  border-width: 0px 0px 1px 20px;
 }
 .h2 textarea{
   font-size: large;
+  font-weight: bold;
   border: solid #33f;
-  border-width: 1px 1px 1px 5px;
+  border-width: 0px 0px 0px 5px;
   margin-left: 15px;
 }
 .h3 textarea{
   font-size: medium;
+  font-weight: bold;
   border: solid #33f;
-  border-width: 1px 1px 1px 1px;
+  border-width: 0px 0px 0px 0px;
   margin-left: 19px;
 }
 .normal textarea{
