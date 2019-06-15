@@ -24,6 +24,13 @@ class Line extends React.Component{
       this.props.onEnter(this.props.no)
       e.preventDefault()
       break;
+      case 8: //BS
+      if(e.target.selectionStart == 0 && e.target.selectionEnd == 0){
+        this.props.onBS(this.props.no, this.props.text)
+        e.preventDefault()
+      }
+      break;
+
     }
   }
   clickHandler(e){

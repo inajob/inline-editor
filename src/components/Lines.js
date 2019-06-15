@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import {changeLine, insertLine, setCursor} from '../actions'
+import {changeLine, insertLine, appendLine, deleteLine, setCursor} from '../actions'
 import Line from './Line'
 
 class Lines extends React.Component{
@@ -12,7 +12,7 @@ class Lines extends React.Component{
     return (
       <div>
         {this.props.lines.map((line, index) => (
-          <Line key={index} {...line} onChange={this.props.onChange} onUp={this.props.onUp} onDown={this.props.onDown} onEnter={this.props.onEnter} onClick={this.props.onClick} />
+          <Line key={index} {...line} onChange={this.props.onChange} onUp={this.props.onUp} onDown={this.props.onDown} onEnter={this.props.onEnter} onClick={this.props.onClick} onBS={this.props.onBS} />
         ))}
       </div>
     )
@@ -81,6 +81,11 @@ const mapDispatchToProps = (dispatch) => {
     onEnter: (no) => {
       dispatch(setCursor(no + 1))
       dispatch(insertLine(no + 1, ""))
+    },
+    onBS: (no, text) => {
+      dispatch(setCursor(no - 1))
+      dispatch(appendLine(no-1, text))
+      dispatch(deleteLine(no))
     },
     onClick: (no) => {
       dispatch(setCursor(no))
