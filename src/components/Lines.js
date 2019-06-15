@@ -78,9 +78,11 @@ const mapDispatchToProps = (dispatch) => {
     onDown: (no) => {
       dispatch(setCursor(no + 1))
     },
-    onEnter: (no) => {
+    onEnter: (no, text, pos) => {
       dispatch(setCursor(no + 1))
-      dispatch(insertLine(no + 1, ""))
+      if(text == undefined)text = ""
+      dispatch(changeLine(no, text.slice(0, pos)))
+      dispatch(insertLine(no + 1, text.slice(pos)))
     },
     onBS: (no, text) => {
       dispatch(setCursor(no - 1))

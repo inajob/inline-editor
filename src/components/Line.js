@@ -33,7 +33,7 @@ class Line extends React.Component{
       }
       break;
       case 13: //enter
-      this.props.onEnter(this.props.no)
+      this.props.onEnter(this.props.no, this.props.text, e.target.selectionStart)
       e.preventDefault()
       break;
       case 8: //BS
