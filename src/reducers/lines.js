@@ -1,6 +1,17 @@
 function lines(state = [{text:""}], action){
   let newState;
   switch(action.type){
+    case 'PREVIEW_LINE':
+      console.log("PREVIEW_LINE", action.no, action.preview)
+      return state.map((item, index) => {
+        if(index !== action.no){
+          return item
+        }
+        return {
+          text: item.text,
+          preview: action.preview
+        }
+      })
     case 'CHANGE_LINE':
       console.log("CHANGE_LINE", action.no, action.text)
       return state.map((item, index) => {
@@ -8,21 +19,17 @@ function lines(state = [{text:""}], action){
           return item
         }
         return {
-          text: action.text
+          text: action.text,
+          preview: action.preview
         }
-      })
-    case 'APPEND_LINE':
-      console.log("APPEND_LINE", action.no, action.text)
-      return state.map((item, index) => {
-        if(index === action.no){
-          return {text : item.text + action.text}
-        }
-        return item
       })
     case 'INSERT_LINE':
       console.log("INSERT_LINE", action.no, action.text)
       newState = state.slice()
-      newState.splice(action.no, 0, {text: action.text})
+      newState.splice(action.no, 0, {
+        text: action.text,
+        preview: action.preview
+      })
       return newState
     case 'DELETE_LINE':
       console.log("DELETE_LINE", action.no)

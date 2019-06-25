@@ -1,7 +1,14 @@
 
-export const changeLine = (no, text) => ({
+export const previewLine = (no, html) => ({
+  type: 'PREVIEW_LINE',
+  html,
+  no,
+})
+
+export const changeLine = (no, text, preview) => ({
   type: 'CHANGE_LINE',
   text,
+  preview,
   no,
 })
 
@@ -11,15 +18,10 @@ export const deleteLine = (no, text) => ({
   no,
 })
 
-export const appendLine = (no, text) => ({
-  type: 'APPEND_LINE',
-  text,
-  no,
-})
-
-export const insertLine = (no, text) => ({
+export const insertLine = (no, text, preview) => ({
   type: 'INSERT_LINE',
   text,
+  preview,
   no,
 })
 

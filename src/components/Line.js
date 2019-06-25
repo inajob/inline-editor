@@ -51,8 +51,13 @@ class Line extends React.Component{
   }
   render() {
     return (
-      <div className={'line ' + this.props.className}>
-        <textarea ref="rawInput" onChange={this.send} onKeyDown={this.keyHandler} onClick={this.clickHandler} value={this.props.text} />
+      <div className={'line ' + this.props.className} onClick={this.clickHandler}>
+        <div style={{display: this.props.isFocus?"block":"none"}}>
+          <textarea ref="rawInput" onChange={this.send} onKeyDown={this.keyHandler} value={this.props.text} />
+        </div>
+        <div style={{display: !this.props.isFocus?"block":"none"}}>
+          <div dangerouslySetInnerHTML={{__html:this.props.preview}} />
+        </div>
       </div>
     )
   }

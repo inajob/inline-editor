@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import {changeLine, insertLine, appendLine, deleteLine, setCursor} from '../actions'
+import {changeLine, insertLine, deleteLine, setCursor} from '../actions'
 import Line from './Line'
+import Render from '../utils/render'
 
 class Lines extends React.Component{
   constructor(props) {
@@ -12,7 +13,17 @@ class Lines extends React.Component{
     return (
       <div>
         {this.props.lines.map((line, index) => (
-          <Line key={index} {...line} onChange={this.props.onChange} onUp={this.props.onUp} onDown={this.props.onDown} onEnter={this.props.onEnter} onClick={this.props.onClick} onBS={this.props.onBS} />
+          <Line
+                key={index}
+                {...line}
+                onChange={this.props.onChange}
+                onUp={this.props.onUp}
+                onDown={this.props.onDown}
+                onEnter={this.props.onEnter}
+                onClick={this.props.onClick}
+                onBS={this.props.onBSfunc(
+                        index==0?"":this.props.lines[index - 1])}
+                />
         ))}
       </div>
     )
@@ -20,6 +31,11 @@ class Lines extends React.Component{
 }
 Lines.propTypes = {
   onChange: PropTypes.func.isRequired,
+  onUp: PropTypes.func.isRequired,
+  onDown: PropTypes.func.isRequired,
+  onEnter: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onBSfunc: PropTypes.func.isRequired,
 }
 
 const addNumber = (lines => {
@@ -68,7 +84,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onChange: (no,text) => {
-      dispatch(changeLine(no, text))
+      dispatch(changeLine(no, text, Render(text)))
     },
     onUp: (no) => {
       if(no > 0){
@@ -81,12 +97,15 @@ const mapDispatchToProps = (dispatch) => {
     onEnter: (no, text, pos) => {
       dispatch(setCursor(no + 1))
       if(text == undefined)text = ""
-      dispatch(changeLine(no, text.slice(0, pos)))
-      dispatch(insertLine(no + 1, text.slice(pos)))
+      let t1 = text.slice(0, pos)
+      dispatch(changeLine(no, t1, Render(t1)))
+      let t2 = text.slice(pos)
+      dispatch(insertLine(no + 1, t2, Render(t2)))
     },
-    onBS: (no, text) => {
+    onBSfunc: (pretext) => (no, text) =>{
       dispatch(setCursor(no - 1))
-      dispatch(appendLine(no-1, text))
+      let t = pretext.text + text;
+      dispatch(changeLine(no-1, t, Render(t)))
       dispatch(deleteLine(no))
     },
     onClick: (no) => {
@@ -96,6 +115,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const LinesContainer = connect(mapStateToProps, mapDispatchToProps)(Lines)
-
 
 export default LinesContainer
