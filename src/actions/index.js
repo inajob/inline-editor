@@ -25,9 +25,10 @@ export const insertLine = (no, text, preview) => ({
   no,
 })
 
-export const setCursor = (row, col) => ({
+export const setCursor = (row, col, dirty) => ({
   type: 'SET_CURSOR',
   row,
   col,
+  dirty,
 })
 

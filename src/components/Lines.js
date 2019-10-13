@@ -25,6 +25,7 @@ class Lines extends React.Component{
                         index==0?"":this.props.lines[index - 1])}
                 onBS={this.props.onBSfunc(
                         index==0?"":this.props.lines[index - 1])}
+                onRefreshed={this.props.onRefreshed}
                 />
         ))}
       </div>
@@ -46,11 +47,12 @@ const addNumber = (lines => {
     return line;
   })
 })
-const addFocus = ((col, row, lines) => {
+const addFocus = ((col, row, dirty, lines) => {
   return lines.map((line, index) => {
     if(index == row){
       line.isFocus = true;
       line.column = col;
+      line.dirty = dirty;
     }else{
       line.isFocus = false;
     }
@@ -80,7 +82,7 @@ const addClassName = (lines => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    lines: addClassName(addFocus(state.cursor.col, state.cursor.row, addNumber(state.lines))),
+    lines: addClassName(addFocus(state.cursor.col, state.cursor.row, state.cursor.dirty, addNumber(state.lines))),
     cursor: state.cursor
   }
 }
@@ -91,14 +93,14 @@ const mapDispatchToProps = (dispatch) => {
     },
     onUp: (no, col) => {
       if(no > 0){
-        dispatch(setCursor(no - 1, col))
+        dispatch(setCursor(no - 1, col, true))
       }
     },
     onDown: (no, col) => {
-      dispatch(setCursor(no + 1, col))
+      dispatch(setCursor(no + 1, col, true))
     },
     onEnter: (no, text, pos) => {
-      dispatch(setCursor(no + 1, 0))
+      dispatch(setCursor(no + 1, 0, true))
       if(text == undefined)text = ""
       let t1 = text.slice(0, pos)
       dispatch(changeLine(no, t1, Render(t1)))
@@ -107,18 +109,21 @@ const mapDispatchToProps = (dispatch) => {
     },
     onLeftUp: (pretext) => (no) =>{
       if(no > 0){
-        dispatch(setCursor(no - 1, pretext.text.length))
+        dispatch(setCursor(no - 1, pretext.text.length, true))
       }
     },
     onBSfunc: (pretext) => (no, text) =>{
-      dispatch(setCursor(no - 1, pretext.text.length))
+      dispatch(setCursor(no - 1, pretext.text.length, true))
       let t = pretext.text + text;
       dispatch(changeLine(no-1, t, Render(t)))
       dispatch(deleteLine(no))
     },
     onClick: (no) => {
-      dispatch(setCursor(no, 0))
+      dispatch(setCursor(no, 0, true))
     },
+    onRefreshed: (no) => {
+      dispatch(setCursor(no, 0, false))
+    }
   }
 }
 

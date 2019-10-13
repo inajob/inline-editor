@@ -66,11 +66,16 @@ class Line extends React.Component{
   updateFocus(){
     if(this.props.isFocus){
       this.refs.rawInput.focus();
-      var that = this;
-      setTimeout(function(){
-        // FIXME: remove setTimeout
-        that.refs.rawInput.setSelectionRange(that.props.column, that.props.column);
-      },0);
+      if(this.props.dirty){
+        var that = this;
+        setTimeout(function(){
+          console.log("update cursor");
+          // FIXME: remove setTimeout
+          that.refs.rawInput.setSelectionRange(that.props.column, that.props.column);
+          that.props.onRefreshed(that.props.no);
+          // ---
+        },10);
+      }
       console.log(this.refs.rawInput)
     }
   }
@@ -89,6 +94,7 @@ Text.propTypes = {
   onClick: PropTypes.func.isRequired,
   onLeftUp: PropTypes.func.isRequired,
   onBS: PropTypes.func.isRequired,
+  onRefreshed: PropTypes.func.isRequired,
   no: PropTypes.number.isRequires,
   text: PropTypes.string.isRequired
 }
