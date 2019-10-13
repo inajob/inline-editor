@@ -92,9 +92,17 @@ const addHeight = (lines => {
   })
 })
 
+const addIsBlock = (lines => {
+  return lines.map(line => {
+    line.isBlock = isBlock(line.text)
+    return line;
+  })
+})
+
+
 const mapStateToProps = (state, ownProps) => {
   return {
-    lines: addClassName(addHeight(addFocus(state.cursor.col, state.cursor.row, state.cursor.dirty, addNumber(state.lines)))),
+    lines: addClassName(addIsBlock(addHeight(addFocus(state.cursor.col, state.cursor.row, state.cursor.dirty, addNumber(state.lines))))),
     cursor: state.cursor
   }
 }

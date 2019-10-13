@@ -54,16 +54,30 @@ class Line extends React.Component{
     this.props.onClick(this.props.no);
   }
   render() {
-    return (
-      <div className={'line ' + this.props.className} onClick={this.clickHandler}>
-        <div style={{display: this.props.isFocus?"block":"none"}}>
-          <textarea ref="rawInput" style={{height: this.props.height}} onChange={this.send} onKeyDown={this.keyHandler} value={this.props.text} />
+    if(this.props.isBlock){
+      return (
+        <div className={'line ' + this.props.className} onClick={this.clickHandler}>
+          <div style={{display: this.props.isFocus?"block":"none"}}>
+            <textarea ref="rawInput" style={{height: this.props.height}} onChange={this.send} onKeyDown={this.keyHandler} value={this.props.text} />
+          </div>
+          <div>
+            <div dangerouslySetInnerHTML={{__html:this.props.preview}} />
+          </div>
         </div>
-        <div style={{display: !this.props.isFocus?"block":"none"}}>
-          <div dangerouslySetInnerHTML={{__html:this.props.preview}} />
+      )
+    }else{
+      // inline
+      return (
+        <div className={'line ' + this.props.className} onClick={this.clickHandler}>
+          <div style={{display: this.props.isFocus?"block":"none"}}>
+            <textarea ref="rawInput" style={{height: this.props.height}} onChange={this.send} onKeyDown={this.keyHandler} value={this.props.text} />
+          </div>
+          <div style={{display: !this.props.isFocus?"block":"none"}}>
+            <div dangerouslySetInnerHTML={{__html:this.props.preview}} />
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
   updateFocus(){
     if(this.props.isFocus){
@@ -87,7 +101,7 @@ class Line extends React.Component{
   }
 
 }
-Text.propTypes = {
+Line.propTypes = {
   onChange: PropTypes.func.isRequired,
   onUp: PropTypes.func.isRequired,
   onDown: PropTypes.func.isRequired,
@@ -95,7 +109,8 @@ Text.propTypes = {
   onLeftUp: PropTypes.func.isRequired,
   onBS: PropTypes.func.isRequired,
   onRefreshed: PropTypes.func.isRequired,
-  no: PropTypes.number.isRequires,
+  no: PropTypes.number.isRequired,
+  isBlock: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired
 }
 
