@@ -1,4 +1,7 @@
-
+*{
+  margin: 0px;
+  padding: 0px;
+}
 body{
   background-color: #fff;
   font-size: 16px;
@@ -14,6 +17,7 @@ textarea {
    background-color: transparent;
    font-family: sans-serif;
    font-size: 16px;
+   line-height: 16px;
 }
 textarea:focus{
   outline: none;
@@ -55,6 +59,18 @@ line{
 .h3 textarea{
   font-size: medium;
   font-weight: bold;
+}
+.block {
+  border: dotted 3px;
+  padding: 0.5em;
+  margin: 0.5em;
+}
+.mode {
+  background-color: #666;
+  border-radius: 3px;
+  color: white;
+  font-size: 3px;
+  padding: 3px;
 }
 
 .normal{

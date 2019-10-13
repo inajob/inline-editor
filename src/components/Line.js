@@ -15,10 +15,10 @@ class Line extends React.Component{
   keyHandler(e){
     switch(e.keyCode){
       case 38: //up
-      this.props.onUp(this.props.no, e.target.selectionStart)
+      this.props.onUp(this.props.no, e.target.selectionStart, this.props.text)
       break;
       case 40: //down
-      this.props.onDown(this.props.no, e.target.selectionStart)
+      this.props.onDown(this.props.no, e.target.selectionStart, this.props.text)
       break;
       case 37: //left
       // when cursor is head
@@ -35,8 +35,9 @@ class Line extends React.Component{
       }
       break;
       case 13: //enter
-      this.props.onEnter(this.props.no, this.props.text, e.target.selectionStart)
-      e.preventDefault()
+      if(!this.props.onEnter(this.props.no, this.props.text, e.target.selectionStart)){
+        e.preventDefault()
+      }
       break;
       case 8: //BS
       // when cursor is head
@@ -55,7 +56,7 @@ class Line extends React.Component{
     return (
       <div className={'line ' + this.props.className} onClick={this.clickHandler}>
         <div style={{display: this.props.isFocus?"block":"none"}}>
-          <textarea ref="rawInput" onChange={this.send} onKeyDown={this.keyHandler} value={this.props.text} />
+          <textarea ref="rawInput" style={{height: this.props.height}} onChange={this.send} onKeyDown={this.keyHandler} value={this.props.text} />
         </div>
         <div style={{display: !this.props.isFocus?"block":"none"}}>
           <div dangerouslySetInnerHTML={{__html:this.props.preview}} />
@@ -73,10 +74,8 @@ class Line extends React.Component{
           // FIXME: remove setTimeout
           that.refs.rawInput.setSelectionRange(that.props.column, that.props.column);
           that.props.onRefreshed(that.props.no);
-          // ---
         },10);
       }
-      console.log(this.refs.rawInput)
     }
   }
   componentDidUpdate(){
