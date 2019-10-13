@@ -119,7 +119,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(deleteLine(no))
     },
     onClick: (no) => {
-      dispatch(setCursor(no, 0, true))
+      dispatch(setCursor(no, 0, false))
     },
     onRefreshed: (no) => {
       dispatch(setCursor(no, 0, false))
