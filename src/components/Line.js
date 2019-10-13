@@ -22,14 +22,14 @@ class Line extends React.Component{
       break;
       case 37: //left
       // when cursor is head
-      if(e.target.selectionStart == 0 && e.target.selectionEnd == 0){
+      if(e.target.selectionStart === 0 && e.target.selectionEnd === 0){
         this.props.onLeftUp(this.props.no)
       }else{
       }
       break;
       case 39: //right
       // when cursor is end
-      if(e.target.selectionStart == this.props.text.length){
+      if(e.target.selectionStart === this.props.text.length){
         this.props.onDown(this.props.no, 0)
       }else{
       }
@@ -40,7 +40,7 @@ class Line extends React.Component{
       break;
       case 8: //BS
       // when cursor is head
-      if(e.target.selectionStart == 0 && e.target.selectionEnd == 0){
+      if(e.target.selectionStart === 0 && e.target.selectionEnd === 0){
         this.props.onBS(this.props.no, this.props.text)
         e.preventDefault()
       }

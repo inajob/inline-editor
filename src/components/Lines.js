@@ -22,9 +22,9 @@ class Lines extends React.Component{
                 onEnter={this.props.onEnter}
                 onClick={this.props.onClick}
                 onLeftUp={this.props.onLeftUp(
-                        index==0?"":this.props.lines[index - 1])}
+                        index===0?"":this.props.lines[index - 1])}
                 onBS={this.props.onBSfunc(
-                        index==0?"":this.props.lines[index - 1])}
+                        index===0?"":this.props.lines[index - 1])}
                 onRefreshed={this.props.onRefreshed}
                 />
         ))}
@@ -49,7 +49,7 @@ const addNumber = (lines => {
 })
 const addFocus = ((col, row, dirty, lines) => {
   return lines.map((line, index) => {
-    if(index == row){
+    if(index === row){
       line.isFocus = true;
       line.column = col;
       line.dirty = dirty;
@@ -61,11 +61,11 @@ const addFocus = ((col, row, dirty, lines) => {
 })
 const calcClassName = (text) => {
   let className = "normal"
-  if(text.indexOf("###") == 0){
+  if(text.indexOf("###") === 0){
     className = "h3"
-  }else if(text.indexOf("##") == 0){
+  }else if(text.indexOf("##") === 0){
     className = "h2"
-  }else if(text.indexOf("#") == 0){
+  }else if(text.indexOf("#") === 0){
     className = "h1"
   }
   return className;
@@ -101,7 +101,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     onEnter: (no, text, pos) => {
       dispatch(setCursor(no + 1, 0, true))
-      if(text == undefined)text = ""
+      if(text === undefined)text = ""
       let t1 = text.slice(0, pos)
       dispatch(changeLine(no, t1, Render(t1)))
       let t2 = text.slice(pos)
