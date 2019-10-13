@@ -12,7 +12,7 @@ export const Render = (text) => {
     if(parts[0] === ">>"){
       switch(parts[1]){
         case "pre":
-          ret += "<span class='mode'>&gt;&gt; " + "pre</span>";
+          ret += "<span class='mode'>&gt;&gt; pre</span>";
           ret += "<pre>" + lastPart.join("\n") + "</pre>";
         break;
         default:

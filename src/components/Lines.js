@@ -6,9 +6,9 @@ import Line from './Line'
 import {isBlock, Render, getCursorPos, numLines, getLines} from '../utils/render'
 
 class Lines extends React.Component{
-  constructor(props) {
-    super(props)
-  }
+  //constructor(props) {
+  //  super(props)
+  //}
   render() {
     return (
       <div>

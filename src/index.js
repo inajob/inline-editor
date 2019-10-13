@@ -4,12 +4,12 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 import App from './components/App'
-import {insertLine, changeLine} from './actions'
+import {insertLine} from './actions'
 import './index.css';
 import {Render} from './utils/render'
 
 const store = createStore(rootReducer)
-const unsubscribe = store.subscribe(() => console.log("state",store.getState()))
+//const unsubscribe = store.subscribe(() => console.log("state",store.getState()))
 
 store.dispatch(insertLine(0,
   "# React.jsで作ったインラインマークダウンエディタ",

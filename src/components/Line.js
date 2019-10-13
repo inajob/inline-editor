@@ -46,7 +46,8 @@ class Line extends React.Component{
         e.preventDefault()
       }
       break;
-
+      default:
+        // pass
     }
   }
   clickHandler(e){

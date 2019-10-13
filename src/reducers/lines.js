@@ -36,7 +36,8 @@ function lines(state = [{text:""}], action){
       newState = state.slice()
       newState.splice(action.no, 1)
       return newState
-
+    default:
+      // pass
   }
   return state
 }

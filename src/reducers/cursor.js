@@ -6,6 +6,8 @@ function cursor(state = {col: 0, row: 0, dirty: false}, action){
         col: action.col,
         dirty: action.dirty,
       }
+    default:
+      // pass
   }
   return state;
 }
