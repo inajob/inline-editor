@@ -15,21 +15,23 @@ class Line extends React.Component{
   keyHandler(e){
     switch(e.keyCode){
       case 38: //up
-      this.props.onUp(this.props.no)
+      this.props.onUp(this.props.no, e.target.selectionStart)
       break;
       case 40: //down
-      this.props.onDown(this.props.no)
+      this.props.onDown(this.props.no, e.target.selectionStart)
       break;
       case 37: //left
       // when cursor is head
       if(e.target.selectionStart == 0 && e.target.selectionEnd == 0){
-        this.props.onUp(this.props.no)
+        this.props.onLeftUp(this.props.no)
+      }else{
       }
       break;
       case 39: //right
       // when cursor is end
       if(e.target.selectionStart == this.props.text.length){
-        this.props.onDown(this.props.no)
+        this.props.onDown(this.props.no, 0)
+      }else{
       }
       break;
       case 13: //enter
@@ -64,6 +66,12 @@ class Line extends React.Component{
   updateFocus(){
     if(this.props.isFocus){
       this.refs.rawInput.focus();
+      var that = this;
+      setTimeout(function(){
+        // FIXME: remove setTimeout
+        that.refs.rawInput.setSelectionRange(that.props.column, that.props.column);
+      },0);
+      console.log(this.refs.rawInput)
     }
   }
   componentDidUpdate(){
@@ -79,6 +87,8 @@ Text.propTypes = {
   onUp: PropTypes.func.isRequired,
   onDown: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
+  onLeftUp: PropTypes.func.isRequired,
+  onBS: PropTypes.func.isRequired,
   no: PropTypes.number.isRequires,
   text: PropTypes.string.isRequired
 }

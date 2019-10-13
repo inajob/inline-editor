@@ -21,6 +21,8 @@ class Lines extends React.Component{
                 onDown={this.props.onDown}
                 onEnter={this.props.onEnter}
                 onClick={this.props.onClick}
+                onLeftUp={this.props.onLeftUp(
+                        index==0?"":this.props.lines[index - 1])}
                 onBS={this.props.onBSfunc(
                         index==0?"":this.props.lines[index - 1])}
                 />
@@ -44,10 +46,11 @@ const addNumber = (lines => {
     return line;
   })
 })
-const addFocus = ((row, lines) => {
+const addFocus = ((col, row, lines) => {
   return lines.map((line, index) => {
     if(index == row){
       line.isFocus = true;
+      line.column = col;
     }else{
       line.isFocus = false;
     }
@@ -77,7 +80,7 @@ const addClassName = (lines => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    lines: addClassName(addFocus(state.cursor.row, addNumber(state.lines))),
+    lines: addClassName(addFocus(state.cursor.col, state.cursor.row, addNumber(state.lines))),
     cursor: state.cursor
   }
 }
@@ -86,30 +89,35 @@ const mapDispatchToProps = (dispatch) => {
     onChange: (no,text) => {
       dispatch(changeLine(no, text, Render(text)))
     },
-    onUp: (no) => {
+    onUp: (no, col) => {
       if(no > 0){
-        dispatch(setCursor(no - 1))
+        dispatch(setCursor(no - 1, col))
       }
     },
-    onDown: (no) => {
-      dispatch(setCursor(no + 1))
+    onDown: (no, col) => {
+      dispatch(setCursor(no + 1, col))
     },
     onEnter: (no, text, pos) => {
-      dispatch(setCursor(no + 1))
+      dispatch(setCursor(no + 1, 0))
       if(text == undefined)text = ""
       let t1 = text.slice(0, pos)
       dispatch(changeLine(no, t1, Render(t1)))
       let t2 = text.slice(pos)
       dispatch(insertLine(no + 1, t2, Render(t2)))
     },
+    onLeftUp: (pretext) => (no) =>{
+      if(no > 0){
+        dispatch(setCursor(no - 1, pretext.text.length))
+      }
+    },
     onBSfunc: (pretext) => (no, text) =>{
-      dispatch(setCursor(no - 1))
+      dispatch(setCursor(no - 1, pretext.text.length))
       let t = pretext.text + text;
       dispatch(changeLine(no-1, t, Render(t)))
       dispatch(deleteLine(no))
     },
     onClick: (no) => {
-      dispatch(setCursor(no))
+      dispatch(setCursor(no, 0))
     },
   }
 }
