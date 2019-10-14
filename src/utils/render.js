@@ -1,4 +1,6 @@
-export const Render = (text) => {
+import {mermaidRender} from '../render/mermaid'
+
+export const Render = (no, text) => {
   // TODO: sanitize!!
   console.log("Render", text)
   if(isBlock(text)){
@@ -14,6 +16,10 @@ export const Render = (text) => {
         case "pre":
           ret += "<span class='mode'>&gt;&gt; pre</span>";
           ret += "<pre>" + lastPart.join("\n") + "</pre>";
+        break;
+        case "mermaid":
+          ret += "<span class='mode'>&gt;&gt; mermaid</span>";
+          ret += mermaidRender(no, lastPart);
         break;
         default:
           ret += "<pre>" + text + "</pre>";

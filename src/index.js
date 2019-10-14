@@ -7,31 +7,39 @@ import App from './components/App'
 import {insertLine} from './actions'
 import './index.css';
 import {Render} from './utils/render'
+import {mermaidAPI} from 'mermaid'
 
 const store = createStore(rootReducer)
 //const unsubscribe = store.subscribe(() => console.log("state",store.getState()))
 
+mermaidAPI.initialize({startOnLoad: true, theme: 'forest'});
+
 store.dispatch(insertLine(0,
   "# React.jsで作ったインラインマークダウンエディタ",
-  Render("# React.jsで作ったインラインマークダウンエディタ")
+  Render(0,"# React.jsで作ったインラインマークダウンエディタ")
 ))
 let text = "ブロック記法に対応しました"
 store.dispatch(insertLine(1,
   text,
-  Render(text)
+  Render(1,text)
 ))
 text = ">> pre\n//ソースコードみたいなの\n alert('Hello World');"
 store.dispatch(insertLine(2,
   text,
-  Render(text)
+  Render(2,text)
 ))
+text = ">> mermaid\ngraph LR\n図も描けます\nPlugin --> Pre\n Plugin --> Mermaid"
 store.dispatch(insertLine(3,
-  "## 作った人",
-  Render("## 作った人")
+  text,
+  Render(3,text)
 ))
 store.dispatch(insertLine(4,
+  "## 作った人",
+  Render(4,"## 作った人")
+))
+store.dispatch(insertLine(5,
   "@ina_ani",
-  Render("@ina_ani")
+  Render(5,"@ina_ani")
 ))
 
 ReactDOM.render(

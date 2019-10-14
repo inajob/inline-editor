@@ -76,3 +76,6 @@ line{
 .normal{
   margin-left: 20px;
 }
+.error{
+  color: red;
+}
