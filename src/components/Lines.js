@@ -92,16 +92,24 @@ const addHeight = (lines => {
   })
 })
 
+const addIsBlock = (lines => {
+  return lines.map(line => {
+    line.isBlock = isBlock(line.text)
+    return line;
+  })
+})
+
+
 const mapStateToProps = (state, ownProps) => {
   return {
-    lines: addClassName(addHeight(addFocus(state.cursor.col, state.cursor.row, state.cursor.dirty, addNumber(state.lines)))),
+    lines: addClassName(addIsBlock(addHeight(addFocus(state.cursor.col, state.cursor.row, state.cursor.dirty, addNumber(state.lines))))),
     cursor: state.cursor
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
     onChange: (no,text) => {
-      dispatch(changeLine(no, text, Render(text)))
+      dispatch(changeLine(no, text, Render(no, text)))
     },
     onUp: (upText) => (no, col, text) => {
       if(no <= 0){
@@ -141,9 +149,9 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(setCursor(no + 1, 0, true))
         if(text === undefined)text = ""
         let t1 = text.slice(0, pos)
-        dispatch(changeLine(no, t1, Render(t1)))
+        dispatch(changeLine(no, t1, Render(no, t1)))
         let t2 = text.slice(pos)
-        dispatch(insertLine(no + 1, t2, Render(t2)))
+        dispatch(insertLine(no + 1, t2, Render(no + 1, t2)))
         return false; // prevent default
       }
       /*
