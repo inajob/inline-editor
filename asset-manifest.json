@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/inline-editor/static/css/main.761c06f6.chunk.css",
-    "main.js": "/inline-editor/static/js/main.9f7c5656.chunk.js",
-    "main.js.map": "/inline-editor/static/js/main.9f7c5656.chunk.js.map",
+    "main.js": "/inline-editor/static/js/main.a1755a29.chunk.js",
+    "main.js.map": "/inline-editor/static/js/main.a1755a29.chunk.js.map",
     "runtime~main.js": "/inline-editor/static/js/runtime~main.9caba4f9.js",
     "runtime~main.js.map": "/inline-editor/static/js/runtime~main.9caba4f9.js.map",
     "static/css/2.1d5ea050.chunk.css": "/inline-editor/static/css/2.1d5ea050.chunk.css",
     "static/js/2.0bec81fb.chunk.js": "/inline-editor/static/js/2.0bec81fb.chunk.js",
     "static/js/2.0bec81fb.chunk.js.map": "/inline-editor/static/js/2.0bec81fb.chunk.js.map",
     "index.html": "/inline-editor/index.html",
-    "precache-manifest.2769678f42e1d1ea5ad718e9c0cc9d89.js": "/inline-editor/precache-manifest.2769678f42e1d1ea5ad718e9c0cc9d89.js",
+    "precache-manifest.485bfa373c5eae134a1baa39c5967776.js": "/inline-editor/precache-manifest.485bfa373c5eae134a1baa39c5967776.js",
     "service-worker.js": "/inline-editor/service-worker.js",
     "static/css/2.1d5ea050.chunk.css.map": "/inline-editor/static/css/2.1d5ea050.chunk.css.map",
     "static/css/main.761c06f6.chunk.css.map": "/inline-editor/static/css/main.761c06f6.chunk.css.map"
