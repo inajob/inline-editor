@@ -163,8 +163,8 @@ const mapDispatchToProps = (dispatch) => {
     },
     onTab: (no, text, shift) => {
       if(shift){
-        if(text.search(/-+ /) == 0){ // already list
-          if(text.indexOf("- ") == 0){
+        if(text.search(/-+ /) === 0){ // already list
+          if(text.indexOf("- ") === 0){
             text = text.slice(2);
           }else{
             text = text.slice(1);
@@ -173,7 +173,7 @@ const mapDispatchToProps = (dispatch) => {
           // none
         }
       }else{
-        if(text.search(/-+/) == 0){ // already list
+        if(text.search(/-+/) === 0){ // already list
           text = "-" + text
         }else{ // first list
           text = "- " + text
