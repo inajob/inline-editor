@@ -1,4 +1,5 @@
 import {mermaidRender} from '../render/mermaid'
+import {hljsRender} from '../render/hljs'
 
 export const Render = (no, text) => {
   // TODO: sanitize!!
@@ -20,6 +21,11 @@ export const Render = (no, text) => {
         case "mermaid":
           ret += "<span class='mode'>&gt;&gt; mermaid</span>";
           ret += mermaidRender(no, lastPart);
+        break;
+        case "code":
+          ret += "<span class='mode'>&gt;&gt; code</span>";
+          console.log("CODE PART",lastPart);
+          ret += hljsRender(no, lastPart);
         break;
         default:
           ret += "<pre>" + text + "</pre>";

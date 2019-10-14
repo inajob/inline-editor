@@ -6,6 +6,7 @@ import rootReducer from './reducers'
 import App from './components/App'
 import {insertLine} from './actions'
 import './index.css';
+import 'highlight.js/styles/github.css';  // choose your style!
 import {Render} from './utils/render'
 import {mermaidAPI} from 'mermaid'
 
@@ -14,33 +15,21 @@ const store = createStore(rootReducer)
 
 mermaidAPI.initialize({startOnLoad: true, theme: 'forest'});
 
-store.dispatch(insertLine(0,
-  "# React.jsで作ったインラインマークダウンエディタ",
-  Render(0,"# React.jsで作ったインラインマークダウンエディタ")
-))
-let text = "ブロック記法に対応しました"
-store.dispatch(insertLine(1,
-  text,
-  Render(1,text)
-))
-text = ">> pre\n//ソースコードみたいなの\n alert('Hello World');"
-store.dispatch(insertLine(2,
-  text,
-  Render(2,text)
-))
-text = ">> mermaid\ngraph LR\n図も描けます\nPlugin --> Pre\n Plugin --> Mermaid"
-store.dispatch(insertLine(3,
-  text,
-  Render(3,text)
-))
-store.dispatch(insertLine(4,
-  "## 作った人",
-  Render(4,"## 作った人")
-))
-store.dispatch(insertLine(5,
-  "@ina_ani",
-  Render(5,"@ina_ani")
-))
+function loadLine(no, text){
+  store.dispatch(insertLine(no, text, Render(no,text)))
+}
+
+loadLine(0, "# React.jsで作ったインラインマークダウンエディタ")
+loadLine(1, "インラインで編集ができる書式付きエディタです。")
+loadLine(1, "ブロック記法に対応しました")
+loadLine(2, "## 整形済みテキスト")
+loadLine(3, ">> pre\n　 ∧,,∧\n 　( `･ω･)\n 　/　∽ |")
+loadLine(4, "## シンタックスハイライト")
+loadLine(5, ">> code\n//ソースコードみたいなの\nfunction hoge(){\n  alert('Hello World');\n}")
+loadLine(6, "## mermaidによる作画")
+loadLine(7, ">> mermaid\ngraph LR\n図も描けます\nPlugin --> Pre\n Plugin --> Mermaid")
+loadLine(8, "# 作った人")
+loadLine(9, "@ina_ani")
 
 ReactDOM.render(
   <Provider store={store}>
