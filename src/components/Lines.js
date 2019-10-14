@@ -20,14 +20,14 @@ class Lines extends React.Component{
                 onUp={this.props.onUp(
                         index===0?"":this.props.lines[index - 1])}
                 onDown={this.props.onDown(
-                        index>=this.props.lines.length - 1?"":this.props.lines[index + 1])}
+                        index>=this.props.lines.length - 1?"":this.props.lines[index + 1].text)}
                 onEnter={this.props.onEnter}
                 onTab={this.props.onTab}
                 onClick={this.props.onClick}
                 onLeftUp={this.props.onLeftUp(
-                        index===0?"":this.props.lines[index - 1])}
+                        index===0?"":this.props.lines[index - 1].text)}
                 onBS={this.props.onBSfunc(
-                        index===0?"":this.props.lines[index - 1])}
+                        index===0?"":this.props.lines[index - 1].text)}
                 onRefreshed={this.props.onRefreshed}
                 />
         ))}
@@ -135,8 +135,8 @@ const mapDispatchToProps = (dispatch) => {
       if(isBlock(text) && pos[1] < num - 1){
         return;
       }
-      if(isBlock(downText.text)){
-        let lines = getLines(downText.text);
+      if(isBlock(downText)){
+        let lines = getLines(downText);
         let firstLine = lines[0];
         dispatch(setCursor(no + 1, Math.min(col, firstLine.length), true))
       }else{
@@ -183,12 +183,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     onLeftUp: (pretext) => (no) =>{
       if(no > 0){
-        dispatch(setCursor(no - 1, pretext.text.length, true))
+        dispatch(setCursor(no - 1, pretext.length, true))
       }
     },
     onBSfunc: (pretext) => (no, text) =>{
-      dispatch(setCursor(no - 1, pretext.text.length, true))
-      let t = pretext.text + text;
+      dispatch(setCursor(no - 1, pretext.length, true))
+      let t = pretext + text;
       dispatch(changeLine(no-1, t, Render(no - 1, t)))
       dispatch(deleteLine(no))
     },
