@@ -30,12 +30,12 @@ class Line extends React.Component{
       case 39: //right
       // when cursor is end
       if(e.target.selectionStart === this.props.text.length){
-        this.props.onDown(this.props.no, 0)
+        this.props.onDown(this.props.no, 0, this.props.text)
       }else{
       }
       break;
       case 13: //enter
-      if(!this.props.onEnter(this.props.no, this.props.text, e.target.selectionStart)){
+      if(!this.props.onEnter(this.props.no, this.props.text, e.target.selectionStart, e.shiftKey)){
         e.preventDefault()
       }
       break;

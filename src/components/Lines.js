@@ -142,8 +142,13 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(setCursor(no + 1, col, true))
       }
     },
-    onEnter: (no, text, pos) => {
+    onEnter: (no, text, pos, shift) => {
       if(isBlock(text)){
+        if(shift){
+          dispatch(insertLine(no + 1, "", ""))
+          dispatch(setCursor(no + 1, 0, true))
+          return false;
+        }
         return true;
       }else{
         dispatch(setCursor(no + 1, 0, true))
@@ -165,7 +170,7 @@ const mapDispatchToProps = (dispatch) => {
     onBSfunc: (pretext) => (no, text) =>{
       dispatch(setCursor(no - 1, pretext.text.length, true))
       let t = pretext.text + text;
-      dispatch(changeLine(no-1, t, Render(t)))
+      dispatch(changeLine(no-1, t, Render(no - 1, t)))
       dispatch(deleteLine(no))
     },
     onClick: (no) => {
