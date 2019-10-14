@@ -22,6 +22,7 @@ class Lines extends React.Component{
                 onDown={this.props.onDown(
                         index>=this.props.lines.length - 1?"":this.props.lines[index + 1])}
                 onEnter={this.props.onEnter}
+                onTab={this.props.onTab}
                 onClick={this.props.onClick}
                 onLeftUp={this.props.onLeftUp(
                         index===0?"":this.props.lines[index - 1])}
@@ -159,8 +160,26 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(insertLine(no + 1, t2, Render(no + 1, t2)))
         return false; // prevent default
       }
-      /*
-      */
+    },
+    onTab: (no, text, shift) => {
+      if(shift){
+        if(text.search(/-+ /) == 0){ // already list
+          if(text.indexOf("- ") == 0){
+            text = text.slice(2);
+          }else{
+            text = text.slice(1);
+          }
+        }else{ // not list
+          // none
+        }
+      }else{
+        if(text.search(/-+/) == 0){ // already list
+          text = "-" + text
+        }else{ // first list
+          text = "- " + text
+        }
+      }
+      dispatch(changeLine(no, text, Render(no, text)))
     },
     onLeftUp: (pretext) => (no) =>{
       if(no > 0){

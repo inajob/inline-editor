@@ -14,6 +14,10 @@ class Line extends React.Component{
   }
   keyHandler(e){
     switch(e.keyCode){
+      case 9: // tab
+      this.props.onTab(this.props.no, this.props.text, e.shiftKey);
+      e.preventDefault()
+      break
       case 38: //up
       this.props.onUp(this.props.no, e.target.selectionStart, this.props.text)
       break;

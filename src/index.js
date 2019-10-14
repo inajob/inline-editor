@@ -21,15 +21,15 @@ function loadLine(no, text){
 
 loadLine(0, "# React.jsで作ったインラインマークダウンエディタ")
 loadLine(1, "インラインで編集ができる書式付きエディタです。")
-loadLine(1, "ブロック記法に対応しました")
-loadLine(2, "## 整形済みテキスト")
-loadLine(3, ">> pre\n　 ∧,,∧\n 　( `･ω･)\n 　/　∽ |")
-loadLine(4, "## シンタックスハイライト")
-loadLine(5, ">> code\n//ソースコードみたいなの\nfunction hoge(){\n  alert('Hello World');\n}")
-loadLine(6, "## mermaidによる作画")
-loadLine(7, ">> mermaid\ngraph LR\n図も描けます\nPlugin --> Pre\n Plugin --> Mermaid")
-loadLine(8, "# 作った人")
-loadLine(9, "@ina_ani")
+loadLine(2, "ブロック記法に対応しました")
+loadLine(3, "## 整形済みテキスト")
+loadLine(4, ">> pre\n　 ∧,,∧\n 　( `･ω･)\n 　/　∽ |")
+loadLine(5, "## シンタックスハイライト")
+loadLine(6, ">> code\n//ソースコードみたいなの\nfunction hoge(){\n  alert('Hello World');\n}")
+loadLine(7, "## mermaidによる作画")
+loadLine(8, ">> mermaid\ngraph LR\n図も描けます\nPlugin --> Pre\n Plugin --> Mermaid")
+loadLine(9, "# 作った人")
+loadLine(10, "@ina_ani")
 
 ReactDOM.render(
   <Provider store={store}>
