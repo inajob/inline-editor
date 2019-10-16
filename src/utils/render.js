@@ -1,9 +1,9 @@
 import {mermaidRender} from '../render/mermaid'
 import {hljsRender} from '../render/hljs'
+import {parse, htmlEncode}  from '../utils/inlineDecorator'
 
 export const Render = (no, text) => {
   // TODO: sanitize!!
-  console.log("Render", text)
   if(isBlock(text)){
     let lines = getLines(text);
     let firstLine = lines[0];
@@ -11,7 +11,6 @@ export const Render = (no, text) => {
     let parts = firstLine.split(/\s+/);
 
     let ret = "";
-    console.log("PARTS:",parts)
     if(parts[0] === ">>"){
       switch(parts[1]){
         case "pre":
@@ -42,7 +41,7 @@ export const Render = (no, text) => {
     }else if(text.indexOf("#") === 0){
       return "<div>" + text + "<div>"
     }
-    return "<div>"+text+"</div>"
+    return "<div>"+htmlEncode(parse(text))+"</div>"
   }
 }
 
